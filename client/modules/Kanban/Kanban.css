@@ -1,1 +1,18 @@
 /* Kanban styles */
+
+.AddLane {
+	padding: 10px;
+	text-transform: uppercase;
+	border-radius: 20px;
+	margin-top: 20px;
+	color: #ffffff;
+	background-color: #2e96d0;
+	border: 2px solid #2e73b9;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.AddLane:hover {
+	border: 2px solid #2e73b9;
+	background-color: #2e73b9;
+}
