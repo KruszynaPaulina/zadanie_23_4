@@ -39,30 +39,19 @@ export function deleteLane(req, res) {
       res.status(500).send(err);
     }
 
+    lane.notes.forEach((note) => {
+      Note.findOneAndRemove({ id: note.id }, (err, note) => {
+        if (err) {
+          res.status(500).send(err);
+        }
+      });
+    }); 
+
     lane.remove(() => {
       res.status(200).end();
     });
   });
 }
-// export function deleteLane(req, res) {
-//   Lane.findOne({ id: req.params.laneId }).exec((err, lane) => {
-//     if (err) {
-//       res.status(500).send(err);
-//     }
-
-//     // lane.notes.forEach((note) => {
-//     //   Note.findOneAndRemove({ id: note.id }, (err, note) => {
-//     //     if (err) {
-//     //       res.status(500).send(err);
-//     //     }
-//     //   });
-//     // }); 
-
-//     lane.remove(() => {
-//       res.status(200).end();
-//     });
-//   });
-// }
 
 export function updateLane(req, res) {
   if (!req.body.name) {

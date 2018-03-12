@@ -9,26 +9,12 @@ const laneSchema = new Schema({
 },
 { usePushEach: true });
 
-// laneSchema.pre('find', function (next) {
-//     this.populate('notes');
-//     next();
-//   });
-
   function populateNotes(next) {
     this.populate('notes');
     next();
   }
 
-  function deleteNotes(next) {
-    const notes = this.notes;
-    notes.forEach(element => {
-      Note.findByIdAndRemove(element._id).exec()
-    });
-    next();
-}
-
 laneSchema.pre('find', populateNotes);
 laneSchema.pre('findOne', populateNotes);
-laneSchema.pre('remove', deleteNotes);
 
 export default mongoose.model('Lane', laneSchema);
